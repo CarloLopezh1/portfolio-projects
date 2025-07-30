@@ -20,7 +20,7 @@ This project analyzes current and future technology trends alongside developer d
 
 ## Files
 
-- [`Capstone_Final_Work.ipnb`](Capstone_Final_Work.ipynb): Full notebook with data cleaning and analysis
+- [`Capstone_Final_Work.ipynb`](Capstone_Final_Work.ipynb): Full notebook with data cleaning and analysis
 - [`Capstone Powerpoint.pdf`](Capstone%20Powerpoint.pdf): Final presentation slides
 
 
