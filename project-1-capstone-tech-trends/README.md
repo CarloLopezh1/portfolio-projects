@@ -21,7 +21,7 @@ This project analyzes current and future technology trends alongside developer d
 ## Files
 
 - [`Capstone_Final_Work.html`](Capstone_Final_Work.html): Full notebook with data cleaning and analysis
-- [Capstone Powerpoint.pdf](Capstone%20Powerpoint.pdf): Final presentation slides
+- [`Capstone Powerpoint.pdf`](Capstone%20Powerpoint.pdf): Final presentation slides
 
 
 ## Reflection
