@@ -25,6 +25,6 @@ This project analyzes current and future technology trends alongside developer d
 
 ## Reflection
 
-> "This project strengthened my ability to clean, analyze, and communicate insights from real-world data. I learned how to bridge technical analysis with business storytelling—skills I aim to apply in future analytics roles."
+This project strengthened my ability to clean, analyze, and communicate insights from real-world data. I learned how to bridge technical analysis with business storytelling—skills I aim to apply in future analytics roles.
 
 ---
