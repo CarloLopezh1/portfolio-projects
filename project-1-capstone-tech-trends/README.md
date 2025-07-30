@@ -22,6 +22,7 @@ This project analyzes current and future technology trends alongside developer d
 
 - [`Capstone_Final_Work.ipynb`](Capstone_Final_Work.ipynb): Full notebook with data cleaning and analysis
 - [`Capstone Powerpoint.pdf`](Capstone%20Powerpoint.pdf): Final presentation slides
+- [`Capstone Cognos Dashboards.pdf`](Capstone%20Cognos%20Dashboard.pdf): Imported Dashboards made on IBM Cognos
 
 
 ## Reflection
