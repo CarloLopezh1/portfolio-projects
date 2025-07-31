@@ -2,7 +2,7 @@
 
 This project explores how well FIFA video game player ratings can predict match outcomes in the English Premier League. By merging player-level FIFA data with Premier League match statistics, we created and tested predictive models with real-world implications — particularly in the context of sports betting.
 
-## 📌 Project Overview
+## Project Overview
 
 **Goal:**  
 Evaluate whether differences in FIFA player ratings between opposing teams can predict match outcomes (win vs. not win) for the home team in Premier League matches.
