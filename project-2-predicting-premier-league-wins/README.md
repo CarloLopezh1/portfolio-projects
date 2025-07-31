@@ -35,15 +35,8 @@ If FIFA ratings — though fictional — can serve as a reliable proxy for real-
 
 ## Project Structure
 
-fifa-premier-league-prediction/
-│
-├── README.md <- You are here
-├── Fifa_Project_Report.pdf <- Full written analysis with data and results
-├── Fifa_Project_Presentation.pdf <- Summary slides
-└── data/
-└── README.md <- Dataset descriptions and source links
-
-
+- [`Fifa_Project_Report.pdf`](Fifa_Project_Report.pdf): Full Report and Findings
+- [`Fifa_Project_Presentation.pdf`](Fifa_Project_Presentation.pdf): Final presentation slides
 ---
 
 ## Data Sources
