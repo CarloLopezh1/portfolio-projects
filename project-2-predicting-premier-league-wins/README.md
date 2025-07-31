@@ -37,6 +37,7 @@ If FIFA ratings — though fictional — can serve as a reliable proxy for real-
 
 - [`Fifa_Project_Report.pdf`](Fifa_Project_Report.pdf): Full Report and Findings
 - [`Fifa_Project_Presentation.pdf`](Fifa_Project_Presentation.pdf): Final presentation slides
+- [`Fifa_Project_Rcodes.Rmd`](Fifa_Project_Rcodes.Rmd): Full Project R code
 ---
 
 ## Data Sources
