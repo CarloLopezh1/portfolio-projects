@@ -1,0 +1,553 @@
+---
+title: "Fifa Models"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+# random libraries
+library(tidyverse) 
+library(rvest)
+library(robotstxt)
+library(dplyr)
+library(vtable)
+library(gtsummary)
+library(gmodels)
+library(sjPlot)
+library(xtable)
+library(psych)
+library(car)
+library(olsrr)
+library(ggrepel)
+library(nflreadr)
+library(nflplotR)
+library(Dict)
+library(stargazer)
+library(xgboost)
+library(fastDummies)
+library(GPArotation)
+library(httr)
+library(jsonlite)
+library(lubridate)
+library(tidyverse)
+library(DT)
+library(glue)
+library(xgboostExplainer)
+library(pROC)
+library(SHAPforxgboost)
+library(data.table)
+library(caret)
+library(shapviz)
+library(DALEX)
+library(readxl)
+library(rsample)
+library(forecast)
+
+# avoid scientific notation
+options(scipen = 9999)
+
+
+```
+
+
+
+# read in data
+```{r}
+premier_league_results_merged_fifa_rating_summary_stats <- read_csv('~/Desktop/MSBA-SA/Fall/Predictive Analytics/Project/Fifa Data Sets/premier_league_results_merged_fifa_rating_summary_stats.csv')
+# premier_league_results_merged_fifa_rating_summary_stats
+
+premier_league_results_merged_fifa_rating_summary_stats$home_win_1_0 <- premier_league_results_merged_fifa_rating_summary_stats$home_win_1_0 %>% as.factor()
+```
+
+# look at data
+```{r}
+head(premier_league_results_merged_fifa_rating_summary_stats)
+colnames(head(premier_league_results_merged_fifa_rating_summary_stats))
+# remember diff is home - away
+```
+
+
+
+# logistic model v1
+```{r}
+colnames_holder <- colnames(premier_league_results_merged_fifa_rating_summary_stats)
+
+# colnames_holder_filt <- colnames_holder[!colnames_holder %in% c('season', 'date', 'home_team', 'away_team', 'home_win_bool', 'home_win_1_0')]
+
+# colnames_holder_filt <- diff_col_names
+
+# store the from colnames_holder in colnames_holder_filt that contain 'diff' in the string
+colnames_holder_filt <- colnames_holder[str_detect(colnames_holder, 'diff')]
+
+# colnames_holder_filt <- colnames_holder[colnames_holder ]
+
+# drop everything but max for gk
+colnames_holder_filt <- colnames_holder_filt[!colnames_holder_filt %in% c('diff_median_rating_GK', 'diff_var_rating_GK')]
+
+# now names from colnames_holder_filt together with a ' + ' in between
+# reg_pred <- paste(colnames_holder_filt, collapse = ' + ')
+
+log_model_v1 <- glm(home_win_1_0 ~ ., data = premier_league_results_merged_fifa_rating_summary_stats[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+summary(log_model_v1)
+```
+
+# test model v1
+```{r}
+# split data
+set.seed(123, sample.kind = 'Rounding')
+
+# ran into a splitting error, make sure enough variances in each group
+init_split <- initial_split(premier_league_results_merged_fifa_rating_summary_stats)
+
+training_data <- training(init_split)
+
+testing_data <- testing(init_split)
+
+
+log_model_v1_test <- glm(home_win_1_0 ~ ., data = training_data[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+predictions_log_model_v1<- predict(log_model_v1_test, newdata = testing_data, type = 'response')
+
+cut_off <- 0.5
+
+# make a vector for win vs. loss, 1 win, 0 loss
+win_loss_bool_v1 <- ifelse(predictions_log_model_v1 > cut_off, 1, 0) %>% unname() %>% as.factor()
+
+
+confusionMatrix(win_loss_bool_v1, testing_data$home_win_1_0, positive = '1')
+
+
+
+```
+
+
+```{r}
+# residual plots
+
+# Create a data frame for plotting
+plot_data <- data.frame(Actual = win_loss_bool_v1, Predicted = predictions_log_model_v1)
+
+# Use ggplot2 for a nicer plot
+library(ggplot2)
+ggplot(plot_data, aes(x = Predicted, fill = Actual)) +
+  geom_histogram(position = "identity", alpha = 0.5, binwidth = 0.1) +
+  labs(x = "Predicted Probability", y = "Count", fill = "Actual Value") +
+  scale_fill_manual(values = c("blue", "red")) +
+  theme_minimal() +
+  ggtitle("Predicted vs Actual Plot") + 
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "black") + 
+  geom_vline(xintercept = 0.6, linetype = "dashed", color = "black") +
+  geom_text(aes(x = 0.50, y = 45, label = "Cutoff = 0.5"), color = "black", size = 3) +
+  geom_text(aes(x = 0.60, y = 45, label = "Cutoff = 0.6"), color = "black", size = 3)
+
+
+```
+
+
+# logistic model v2
+```{r}
+colnames_holder <- colnames(premier_league_results_merged_fifa_rating_summary_stats)
+
+colnames_holder_filt <- colnames_holder[str_detect(colnames_holder, 'diff')]
+
+colnames_holder_filt
+
+
+log_model_v2 <- glm(home_win_1_0 ~ diff_median_rating_home_attack_away_defense + diff_median_rating_home_defense_away_attack + diff_max_rating_home_attack_away_gk + diff_max_rating_home_gk_away_attack + diff_median_rating_Midfield, data = premier_league_results_merged_fifa_rating_summary_stats[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+summary(log_model_v2)
+
+```
+
+
+
+# test model v2
+```{r}
+# split data
+set.seed(123, sample.kind = 'Rounding')
+
+# ran into a splitting error, make sure enough variances in each group
+init_split <- initial_split(premier_league_results_merged_fifa_rating_summary_stats)
+
+training_data <- training(init_split)
+
+testing_data <- testing(init_split)
+
+
+log_model_v2_test <- glm(home_win_1_0 ~ diff_median_rating_home_attack_away_defense + diff_median_rating_home_defense_away_attack + diff_max_rating_home_attack_away_gk + diff_max_rating_home_gk_away_attack + diff_median_rating_Midfield, data = training_data[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+predictions_log_model_v2<- predict(log_model_v2_test, newdata = testing_data, type = 'response')
+
+# make a vector for win vs. loss, 1 win, 0 loss
+win_loss_bool_v2 <- ifelse(predictions_log_model_v2 > cut_off, 1, 0) %>% unname() %>% as.factor()
+
+
+confusionMatrix(win_loss_bool_v2, testing_data$home_win_1_0, positive = '1')
+
+```
+
+
+# interpreting confusion matrix
+
+Interpreting each measurement in the context of betting:
+
+* Accuracy: High accuracy means the model is generally reliable, but for betting, we also need to consider the payoff of each bet.
+
+* Kappa: Moderate Kappa indicates some predictive power, but for betting, we'd prefer a higher value to increase confidence in placing bets.
+
+* **Sensitivity: High sensitivity means we're good at identifying true wins, which is important to capitalize on winning bets.**
+
+* **Specificity: High specificity reduces the risk of false positives, meaning we avoid bets on teams that are predicted to win but don't, potentially saving money.**
+
+* Positive Predictive Value: Informs the likelihood of a win when the model predicts a win, which directly impacts betting decisions. Higher is better to ensure profitability.
+
+* Negative Predictive Value: Useful for avoiding bets on losing/tieing predictions, ensuring we don't miss out on potential wins due to incorrect predictions.
+
+* Prevalence: Indicates the proportion of actual wins; a low prevalence means wins are rarer, suggesting higher payouts but more risk.
+
+* Detection Rate: Low detection rates mean we're missing out on potential winning bets, which could limit profit.
+
+* Detection Prevalence: High prevalence of predicted wins might indicate overconfidence in the model, risking money on too many bets.
+
+* Balanced Accuracy: Important for betting as it reflects the model's ability to avoid biases toward wins or losses, ensuring a balanced view of potential outcomes.
+
+
+
+
+# best model for maximizing money gained
+
+* To determine which model is best for maximizing the amount of money made with betting, where all money line bets are -110, you should consider the Positive Predictive Value (PPV) or precision of the model, which reflects the probability that a predicted win actually results in a win.
+
+* For Model 1, the PPV is 0.6111, and for Model 2, the PPV is 0.5888. Model 1 has a higher PPV, meaning it is more precise in predicting wins. Since betting payouts are affected by the precision of your winning predictions, Model 1 would be the better choice for maximizing potential returns, as it is more likely to correctly identify actual wins, reducing the risk of losing bets. However, it's important to also consider the balance between sensitivity and specificity, along with the PPV, as these will influence the overall effectiveness of the betting strategy. Model 1 also has a slightly higher accuracy and balanced accuracy, further suggesting it might be the better model for betting purposes.
+
+
+
+
+# best model for minizimg money lossed
+
+* To minimize the amount of money lost with betting, where all money line bets are -110, we should focus on the model with higher specificity, since specificity reflects the true negative rate — the ability of the model to correctly identify the actual losses.
+
+  * Model 1 has a specificity of 0.7237.
+  
+  * Model 2 has a higher specificity of 0.7105.
+  
+* While Model 1 has a slightly higher specificity and would typically be the choice for minimizing losses by avoiding false positives (incorrectly predicting a win), Model 2 is not far behind. Additionally, Model 2 has a higher negative predictive value (0.7500 compared to 0.7692 for Model 1), which means it is more reliable when it predicts a loss or tie. Therefore, Model 2 might actually be safer for minimizing the amount of money lost, as it provides a better balance between avoiding false positives and correctly identifying true negatives.
+
+* However, when the difference in specificity is small, as in this case, other factors such as the betting odds, the stakes, and the costs associated with false positives versus false negatives should also be considered to make the best betting decisions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# best models compared
+
+In a betting context, each measurement from the confusion matrix can be interpreted as follows:
+
+* Accuracy: Reflects the overall rate of correct predictions. Higher accuracy means more correct bets. Model 1 has an accuracy of 0.7012, and Model 2 has an accuracy of 0.6813; Model 1 is slightly better.
+
+* Sensitivity (True Positive Rate): The ability to correctly identify actual wins. Higher sensitivity means more successful bets on winning. Model 1 (0.6667) is slightly better than Model 2 (0.6364).
+
+* Specificity (True Negative Rate): The ability to correctly identify losses or ties. Higher specificity means avoiding losing money on wrong bets. Model 1 (0.7237) is slightly better than Model 2 (0.7105).
+
+* Positive Predictive Value (Precision): The proportion of positive predictions that are correct. Higher PPV means a better chance of winning money on placed bets. Model 1 (0.6111) is better than Model 2 (0.5888).
+
+* Negative Predictive Value: The proportion of negative predictions that are correct. Higher NPV means a better chance of correctly avoiding losing bets. Model 2 (0.7500) is slightly better than Model 1 (0.7692).
+
+* Detection Rate: The proportion of actual positive outcomes that were correctly predicted. Higher detection rates can indicate more opportunities to win money. Model 1 (0.2629) is better than Model 2 (0.2510).
+
+* Balanced Accuracy: The average of sensitivity and specificity. Higher balanced accuracy indicates a model that is equally good at predicting wins and avoiding losses. Model 1 (0.6952) is better than Model 2 (0.6734).
+
+* **For betting, a model with higher specificity and NPV may be more conservative, reducing the likelihood of losing money on incorrect bets, while a model with higher sensitivity and PPV may be more aggressive, capturing more potential winning bets but at a higher risk. The choice between the two models would depend on the betting strategy: whether the aim is to maximize wins or minimize losses.**
+
+* Model 1:
+
+  * Pros:
+
+    * Higher accuracy, indicating a better overall rate of correct predictions.
+    
+    * Higher sensitivity, meaning it's better at identifying actual wins, which can maximize potential returns.
+    
+    * Higher specificity, suggesting it's also better at avoiding false positives, reducing potential losses on incorrect bets.
+    
+    * Higher PPV, so when it predicts a win, it's more likely to be correct.
+    
+  * Cons:
+
+    * Lower NPV compared to Model 2, meaning it's slightly less reliable at predicting losses or ties.
+
+    * Might still incur some losses if the model's predictions of wins are incorrect due to lower NPV.
+* Model 2:
+
+  * Pros:
+
+    * Higher NPV, suggesting it is more conservative and better at avoiding losing bets.
+
+    * Slightly lower specificity, but still reasonably high, indicating good performance in avoiding false positives.
+  * Cons:
+
+    * Lower accuracy, meaning overall less correct predictions than Model 1.
+    
+    * Lower sensitivity, indicating it might miss out on predicting some actual wins, potentially reducing the number of winning bets.
+
+    * Lower PPV, meaning a lower chance of a predicted win actually being correct, which could reduce profitability on placed bets.
+
+* **In summary, Model 1 is more suited for a strategy that aims to maximize wins, while Model 2 is more cautious, aiming to minimize losses. The choice depends on whether you prefer the potential for higher gains (with associated risks) or a more conservative approach that seeks to protect against losses.**
+
+```{r}
+for(i in seq(0.3,0.7, 0.1)){
+  print(paste('cutoff of : ',i))
+  print('predictions_log_model_v1')
+  print(confusionMatrix(ifelse(predictions_log_model_v1 > i, 1, 0) %>% unname() %>% as.factor(), testing_data$home_win_1_0, positive = '1'))
+  print(paste('cutoff of : ',i))
+  print('predictions_log_model_v2')
+  print(confusionMatrix(ifelse(predictions_log_model_v2 > i, 1, 0) %>% unname() %>% as.factor(), testing_data$home_win_1_0, positive = '1'))
+}
+
+```
+
+# best model based off of cutoff
+
+**Minimzing Money Lost**
+
+* When comparing two different cutoffs of the same model for betting, where the goal is to minimize the amount of money lost with all money line bets at -110, you would look at the specificity and the Negative Predictive Value (NPV):
+
+  * Specificity: A higher value indicates fewer false positives (incorrect predictions of a win).
+  
+  * NPV: A higher value indicates a greater likelihood that a loss predicted by the model is a true loss, meaning you avoid placing losing bets.
+
+* For Model 1:
+  
+  * At a cutoff of 0.5, the specificity is 0.7237 and the NPV is 0.7692.
+  
+  * At a cutoff of 0.6, the specificity is higher at 0.8947 and the NPV is slightly lower at 0.7083.
+
+* The higher specificity at the 0.6 cutoff means you would incorrectly predict fewer wins, therefore placing fewer losing bets. Despite the NPV being slightly lower at this cutoff, the increase in specificity likely outweighs this difference in the context of avoiding losing bets. Therefore, the cutoff of 0.6 would typically be better for minimizing the amount of money lost.
+
+* Differences in the cutoffs should be interpreted as a trade-off between predicting true wins (sensitivity) and avoiding false positives (specificity). A higher cutoff tends to favor specificity at the expense of sensitivity. In a betting context, where minimizing loss is the goal, a higher specificity is more important than a high sensitivity.
+
+
+**Maximizing Money Gained**
+
+* For maximizing the amount of money won with betting, where all money line bets are at -110, we look at sensitivity and Positive Predictive Value (PPV):
+
+  * Sensitivity (True Positive Rate): Indicates the model's ability to correctly predict wins. A higher sensitivity means you are more likely to place winning bets.
+  
+  * PPV (Precision): The proportion of positive predictions that are correct. A higher PPV means that when a win is predicted, it is more likely to be correct, increasing potential earnings.
+
+* For Model 1:
+
+  * At a cutoff of 0.5, sensitivity is 0.6667 and PPV is 0.6111.
+  
+  * At a cutoff of 0.6, sensitivity is lower at 0.4343 but PPV is higher at 0.7288.
+    
+* While a lower cutoff typically results in a higher sensitivity, increasing potential winning bets, the higher PPV at a cutoff of 0.6 means that the bets you do place are more likely to be correct, which is crucial for maximizing money won. Thus, the cutoff of 0.6 would generally be better for maximizing wins, as it leads to a higher likelihood that your bets on predicted wins will be successful.
+
+# best model
+```{r}
+# split data
+set.seed(123, sample.kind = 'Rounding')
+
+# ran into a splitting error, make sure enough variances in each group
+init_split <- initial_split(premier_league_results_merged_fifa_rating_summary_stats)
+
+training_data <- training(init_split)
+
+testing_data <- testing(init_split)
+
+
+log_model_v1_test <- glm(home_win_1_0 ~ ., data = training_data[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+predictions_log_model_v1<- predict(log_model_v1_test, newdata = testing_data, type = 'response')
+
+cut_off <- 0.5
+
+# make a vector for win vs. loss, 1 win, 0 loss
+win_loss_bool_v1 <- ifelse(predictions_log_model_v1 > cut_off, 1, 0) %>% unname() %>% as.factor()
+
+confusionMatrix(win_loss_bool_v1, testing_data$home_win_1_0, positive = '1')
+
+
+
+cut_off <- 0.6
+
+# make a vector for win vs. loss, 1 win, 0 loss
+win_loss_bool_v1 <- ifelse(predictions_log_model_v1 > cut_off, 1, 0) %>% unname() %>% as.factor()
+
+
+confusionMatrix(win_loss_bool_v1, testing_data$home_win_1_0, positive = '1')
+```
+
+
+```{r}
+summary(log_model_v1)
+
+
+confusionMatrix(win_loss_bool_v1, testing_data$home_win_1_0, positive = '1')
+```
+
+
+# explainer
+```{r, warning = FALSE, message = TRUE}
+set.seed(123, sample.kind = 'Rounding')
+
+
+# build explainer
+explainer <- DALEX::explain(log_model_v1_test, data = testing_data[, (names(testing_data) %in% colnames_holder_filt)], y = testing_data$home_win_bool, label = 'Logistic Regression', class = 'Logistic Regression')
+
+# Model performance
+performance <- model_performance(explainer)
+
+# Variable importance
+importance <- variable_importance(explainer)
+
+# Prediction breakdown for a single observation
+sample_row <- sample(1:length(testing_data), size = 1)
+single_prediction <- predict_parts(explainer, testing_data[sample_row, (names(testing_data) %in% colnames_holder_filt)])
+
+print(testing_data[sample_row,])
+
+plot(performance) %>% print()
+plot(importance) %>% print()
+plot(single_prediction) %>% print()
+
+sample_row_5 <- sample(1:length(testing_data), size = 5)
+for(i in 1:5){
+  single_prediction <- predict_parts(explainer, testing_data[sample_row_5[i], (names(testing_data) %in% colnames_holder_filt)])
+  
+  testing_data[sample_row_5[i],] %>% datatable()
+  
+  plot(performance) %>% print()
+  plot(importance) %>% print()
+  plot(single_prediction) %>% print()
+}
+
+i <- 5
+single_prediction <- predict_parts(explainer, testing_data[sample_row_5[i], (names(testing_data) %in% colnames_holder_filt)])
+
+testing_data[sample_row_5[i],] %>% datatable()
+
+plot(performance) %>% print()
+plot(importance) %>% print()
+plot(single_prediction) %>% print()
+testing_data[sample_row_5[i],] %>% datatable()
+testing_data[sample_row_5[i],colnames(testing_data)] %>% print(width = 10000)
+
+
+```
+
+
+```{r}
+
+```
+
+
+
+# try model 1 without the NA variables
+```{r}
+
+colnames_holder <- colnames(premier_league_results_merged_fifa_rating_summary_stats)
+
+# colnames_holder_filt <- colnames_holder[!colnames_holder %in% c('season', 'date', 'home_team', 'away_team', 'home_win_bool', 'home_win_1_0')]
+
+# colnames_holder_filt <- diff_col_names
+
+# store the from colnames_holder in colnames_holder_filt that contain 'diff' in the string
+colnames_holder_filt <- colnames_holder[str_detect(colnames_holder, 'diff')]
+
+# colnames_holder_filt <- colnames_holder[colnames_holder ]
+
+# drop everything but max for gk
+colnames_holder_filt <- colnames_holder_filt[!colnames_holder_filt %in% c('diff_median_rating_GK', 'diff_var_rating_GK','diff_var_rating_GK', 'diff_median_rating_home_defense_away_attack', 'diff_max_rating_home_gk_away_attack')]
+
+# now names from colnames_holder_filt together with a ' + ' in between
+# reg_pred <- paste(colnames_holder_filt, collapse = ' + ')
+
+log_model_v3 <- glm(home_win_1_0 ~ ., data = premier_league_results_merged_fifa_rating_summary_stats[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+summary(log_model_v3)
+
+# note the aic / deviance numbers don't change whne we remove this, so it is more of a formality than anything else to make a "clean" model
+# but those two were NA bc I believe they were too highly correlated with other variables, so it makes sense to remove them and we accidnelty left the gk variance in which we did not want to do but it also didn't change much
+# we left in the differnece in home attack and away defense and the home attack and away goalie (home offense vs. away defense in general)
+
+# split data
+set.seed(123, sample.kind = 'Rounding')
+
+# ran into a splitting error, make sure enough variances in each group
+init_split <- initial_split(premier_league_results_merged_fifa_rating_summary_stats)
+
+training_data <- training(init_split)
+
+testing_data <- testing(init_split)
+
+
+log_model_v3_test <- glm(home_win_1_0 ~ ., data = training_data[,c('home_win_1_0', colnames_holder_filt)], family = binomial(link = 'logit'))
+
+predictions_log_model_v3<- predict(log_model_v3_test, newdata = testing_data, type = 'response')
+
+cut_off <- 0.6
+
+# make a vector for win vs. loss, 1 win, 0 loss
+win_loss_bool_v3 <- ifelse(predictions_log_model_v3 > cut_off, 1, 0) %>% unname() %>% as.factor()
+
+
+confusionMatrix(win_loss_bool_v3, testing_data$home_win_1_0, positive = '1')
+
+
+```
+
+# explainer
+```{r, warning = FALSE, message = TRUE}
+set.seed(123, sample.kind = 'Rounding')
+
+
+# build explainer
+explainer <- DALEX::explain(log_model_v3_test, data = testing_data[, (names(testing_data) %in% colnames_holder_filt)], y = testing_data$home_win_bool, label = 'Logistic Regression', class = 'Logistic Regression')
+
+# Model performance
+performance <- model_performance(explainer)
+
+# Variable importance
+importance <- variable_importance(explainer)
+
+# Prediction breakdown for a single observation
+# sample_row <- sample(1:length(testing_data), size = 1)
+# single_prediction <- predict_parts(explainer, testing_data[sample_row, (names(testing_data) %in% colnames_holder_filt)])
+
+print(testing_data[sample_row,])
+
+plot(performance) %>% print()
+plot(importance) %>% print()
+# plot(single_prediction) %>% print()
+```
