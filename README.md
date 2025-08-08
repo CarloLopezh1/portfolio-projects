@@ -24,6 +24,12 @@ This repository features a selection of projects that highlight my skills. I lik
 
 Analyzed global developer survey data to uncover trends in programming languages, databases, AI tools, and compensation. Combined Python-based data cleaning and visualization with IBM Cognos dashboarding to present clear, actionable insights.
 
+### [Project 2 – Predicting Premier League Wins Using FIFA Player Ratings](./project-2-fifa-epl-prediction)  
+**Tools Used:** R (RMarkdown), Logistic Regression, dplyr, ggplot2  
+
+Used FIFA video game player ratings to predict match outcomes in the English Premier League. Merged FIFA and EPL datasets, engineered position-based features, and built logistic regression models with real-world applications in sports betting and
+
+
 
 *More projects coming soon!*
 
