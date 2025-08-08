@@ -17,7 +17,8 @@ Welcome to my project portfolio! I'm a data analyst passionate about using real-
 ## Projects
 
 ### [Project 1 – Capstone: Technology Trends & Developer Demographics](./project-1-capstone-tech-trends)
-Analyzes global developer survey data to uncover trends in programming languages, databases, AI tool usage, and compensation. **Combines IBM Cognos dashboards with Python-based analysis.**
+# Using Python Jupyter Notebook and IBM Cognos Dashboards
+Analyzes global developer survey data to uncover trends in programming languages, databases, AI tool usage, and compensation. Combines IBM Cognos dashboards with Python-based analysis.
 
 *More projects coming soon!*
 
