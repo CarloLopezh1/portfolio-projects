@@ -1,6 +1,9 @@
 # Carlo Lopez Hernandez – Data Analytics Portfolio
 
-Welcome to my project portfolio! I'm a data analyst passionate about using real-world data to uncover insights, build visualizations, and tell clear, actionable stories. This repository showcases selected projects that demonstrate my skills in Python, data cleaning, visualization, and dashboarding.
+Hello and welcome to my project portfolio!
+I’m a data analyst who loves working with real-world data to uncover insights and tell stories that matter. I’m especially passionate about building visualizations and using data storytelling to spark curiosity and action.
+
+This repository features a selection of projects that highlight my skills. I like to keep things balanced with a mix of professional and fun projects—so feel free to check back anytime to see what I’m working on next!
 
 ---
 
@@ -16,9 +19,11 @@ Welcome to my project portfolio! I'm a data analyst passionate about using real-
 
 ## Projects
 
-### [Project 1 – Capstone: Technology Trends & Developer Demographics](./project-1-capstone-tech-trends)
-### Using Python Jupyter Notebook and IBM Cognos Dashboards
-Analyzes global developer survey data to uncover trends in programming languages, databases, AI tool usage, and compensation. Combines IBM Cognos dashboards with Python-based analysis.
+### [Project 1 – Capstone: Technology Trends & Developer Demographics](./project-1-capstone-tech-trends)  
+**Tools Used:** Python (Jupyter Notebook), IBM Cognos Dashboards, Pandas, Matplotlib  
+
+Analyzed global developer survey data to uncover trends in programming languages, databases, AI tools, and compensation. Combined Python-based data cleaning and visualization with IBM Cognos dashboarding to present clear, actionable insights.
+
 
 *More projects coming soon!*
 
