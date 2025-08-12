@@ -18,6 +18,9 @@ This project analyzes current and future technology trends alongside developer d
 - Data wrangling and analysis
 - Visualization and presentation
 
+## Dashboard Preview
+
+
 ## Files
 
 - [`Capstone Powerpoint.pdf`](Capstone%20Powerpoint.pdf): Final presentation slides
