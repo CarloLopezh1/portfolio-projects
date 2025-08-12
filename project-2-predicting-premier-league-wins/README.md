@@ -1,4 +1,4 @@
-# Predicting Premier League Wins Using FIFA Player Ratings
+# Predicting Premier League Wins Using FIFA Player Ratings Using RStudio
 
 This project explores how well FIFA video game player ratings can predict match outcomes in the English Premier League. By merging player-level FIFA data with Premier League match statistics, we created and tested predictive models with real-world implications — particularly in the context of sports betting.
 
