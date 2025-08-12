@@ -1,5 +1,4 @@
-# Predicting Premier League Wins Using FIFA Player Ratings •
-# Built with RStudio
+# Predicting Premier League Wins Using FIFA Player Ratings • Built with RStudio
 
 
 
