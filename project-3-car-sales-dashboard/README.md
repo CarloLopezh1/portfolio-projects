@@ -30,7 +30,11 @@ This project analyzes dealership car sales data to identify performance trends i
 
 ![Car Sales Dashboard](images/dashboard-overview.png)
 
-## 💡 Reflections
+## Reflections
 
 This project showcases how Excel can go far beyond basic spreadsheets to deliver real business intelligence. From visual storytelling to profitability analysis, this dashboard reflects my ability to extract insights and communicate them clearly.
+
+## Check out full Project here
+
+
 
