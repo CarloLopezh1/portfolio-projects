@@ -20,6 +20,7 @@ This project analyzes current and future technology trends alongside developer d
 
 ## Dashboard Preview
 
+![Demographics Sample Dashboard](images/Dashboard-Overview-Sample.png)
 
 ## Files
 
