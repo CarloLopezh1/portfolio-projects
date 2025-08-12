@@ -10,9 +10,10 @@ This repository features a selection of projects that highlight my skills. I lik
 ## Skills Demonstrated
 
 - Data wrangling & preprocessing (pandas, NumPy)
-- Data visualization (Seaborn, Matplotlib)
-- Interactive dashboards (IBM Cognos)
+- Data visualization (Seaborn, Matplotlib, ggplot2, Excel)
+- Interactive dashboards (IBM Cognos, Excel)
 - Exploratory data analysis
+- Statistical modeling (Logistic Regression)
 - Communicating technical findings to broad audiences
 
 ---
@@ -24,11 +25,21 @@ This repository features a selection of projects that highlight my skills. I lik
 
 Analyzed global developer survey data to uncover trends in programming languages, databases, AI tools, and compensation. Combined Python-based data cleaning and visualization with IBM Cognos dashboarding to present clear, actionable insights.
 
+---
+
 ### [Project 2 – Predicting Premier League Wins Using FIFA Player Ratings](./project-2-predicting-premier-league-wins)  
 **Tools Used:** R (RMarkdown), Logistic Regression, dplyr, ggplot2  
 
-Used FIFA video game player ratings to predict match outcomes in the English Premier League. Merged FIFA and EPL datasets, engineered position-based features, and built logistic regression models with real-world applications in sports betting and
+Used FIFA video game player ratings to predict match outcomes in the English Premier League. Merged FIFA and EPL datasets, engineered position-based features, and built logistic regression models with real-world applications in sports betting and decision-making.
 
+---
+
+### [Project 3 – Car Sales Dashboard: Analyzing Profit & Performance](./project-3-car-sales-dashboard)  
+**Tools Used:** Microsoft Excel (Pivot Tables, Charts, Formulas, Custom Visuals)  
+
+Built a comprehensive dashboard in Excel to analyze dealership car sales data. Explored performance trends across models, regions, and time using pivot tables, custom charts, and a quadrant-based scatter plot. Delivered strategic insights into profitability, volume efficiency, and seasonal demand — all with no code tools.
+
+---
 
 
 *More projects coming soon!*
