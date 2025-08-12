@@ -1,4 +1,4 @@
-# Car Sales Analysis Using Excel
+# Car Sales Analysis • Built Using Excel
 
 This project analyzes dealership car sales data to identify performance trends in model sales, profitability, and efficiency. Built entirely in Microsoft Excel, the dashboard combines pivot tables, custom charts, and quadrant analysis to uncover actionable insights.
 
