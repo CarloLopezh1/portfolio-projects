@@ -36,5 +36,7 @@ This project showcases how Excel can go far beyond basic spreadsheets to deliver
 
 ## Check out full Project here
 
+- [`Car_Sales_Project`](Car_Sales_Project.xlsx): Full Project Excel File
+
 
 
