@@ -1,4 +1,4 @@
-# Project 1 – Capstone: Technology Trends & Developer Demographics
+# Technology Trends & Developer Demographics Using Python and IBM Cognos
 
 This project analyzes current and future technology trends alongside developer demographics using global survey data. It combines IBM Cognos dashboards with Python-based data cleaning and visualizations.
 
