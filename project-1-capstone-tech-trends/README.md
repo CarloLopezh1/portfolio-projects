@@ -19,7 +19,7 @@ This project analyzes current and future technology trends alongside developer d
 - Visualization and presentation
 
 ## Dashboard Demographics Preview 
-A sample of one of the three interactive dashboards designed to highlight different aspects of the analysis.
+This is one of three dashboards developed as part of the project to analyze and visualize key insights.
 
 ![Demographics Sample Dashboard](images/Dashboard-Overview-Sample.png)
 
