@@ -42,12 +42,6 @@ This scatter plot highlights how different player roles (e.g. top-order batter, 
 
 ---
 
-#### ![Bowling Performance](./images/bowling-performance.png)  
-**Wickets Taken vs. Economy Rate by Role**  
-This visual compares bowlers and allrounders, showing how roles differ in balancing wicket-taking ability and economy. High-wicket bowlers tend to have lower economy rates.
-
----
-
 #### ![Bowling Clusters](./images/bowling-clusters.png)  
 **Hierarchical Clustering on Bowling Stats**  
 Cluster heatmap reveals distinct player groupings based on bowling performance metrics (e.g. wickets per over/match). Useful for role classification and scouting.
