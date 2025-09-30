@@ -9,12 +9,13 @@ This repository features a selection of projects that highlight my skills. I lik
 
 ## Skills Demonstrated
 
-- Data wrangling & preprocessing (pandas, NumPy)
-- Data visualization (Seaborn, Matplotlib, ggplot2, Excel)
-- Interactive dashboards (IBM Cognos, Excel)
-- Exploratory data analysis
-- Statistical modeling (Logistic Regression)
-- Communicating technical findings to broad audiences
+-Data visualization (Seaborn, Matplotlib, ggplot2, Excel)
+-Interactive dashboards (IBM Cognos, Excel, Tableau Public)
+-Exploratory data analysis (EDA on sports, tech, and business data)
+-Statistical modeling (Logistic Regression, clustering, summary stats)
+-Machine learning interpretation (SHAP values, clustering heatmaps)
+-Domain-specific analysis (Sports analytics – tennis & cricket)
+-Communicating insights through strategic reports and visual storytelling
 
 ---
 
