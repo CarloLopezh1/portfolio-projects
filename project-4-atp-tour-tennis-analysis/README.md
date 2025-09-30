@@ -23,9 +23,17 @@ This project explores match-level ATP Tour data to uncover surface-specific perf
 ---
 
 ## Key Visual
+### Peak Age in Number of Wins
+![Peak Age](./images/Peak Age.png)
 
-*(Insert dashboard or chart image here from `/figures` folder — e.g., surface win rates or age trends)*
-*![Screen Shot 2025-09-29 at 7.19.14 PM.png](Screen Shot 2025-09-29 at 7.19.14 PM.png)
+### Player Primes by Surface
+![Player Primes by Surface](./images/Player by Surface.png)
+
+### Predicting Upsets by Surface Type
+![Predicting Upsets](./images/Surface Types.png)
+
+### Investing in Facilities
+![Investing in Facilities](./images/Invest.png)
 
 ---
 
