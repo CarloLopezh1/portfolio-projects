@@ -25,6 +25,7 @@ This project explores match-level ATP Tour data to uncover surface-specific perf
 ## Key Visual
 
 *(Insert dashboard or chart image here from `/figures` folder — e.g., surface win rates or age trends)*
+![Car Sales Dashboard](images/dashboard-overview.png)
 
 ---
 
