@@ -47,7 +47,7 @@ Built a comprehensive dashboard in Excel to analyze dealership car sales data. E
 
 Analyzed ATP Tour match data to uncover surface-specific performance trends, peak player ages, and upset probabilities. Built visualizations and predictive models to guide training investments and strategic decisions — including a case study on Spanish player development. Delivered recommendations through a concise report and storytelling-focused dashboard.
 
-
+---
 
 *More projects coming soon!*
 
