@@ -42,7 +42,7 @@ If FIFA ratings — though fictional — can serve as a reliable proxy for real-
 - [`Fifa_Project_Rcodes.Rmd`](Fifa_Project_Rcodes.Rmd): Full Project R code
 ---
 
-### Example Visuals
+### Example Visuals (Many more in the report and presentation)
 
 #### ![Model Coefficients & Confusion Matrix](./images/model-1.png)  
 **Model 1 Regression Output & Confusion Matrix**  
