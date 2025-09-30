@@ -37,9 +37,17 @@ Used FIFA video game player ratings to predict match outcomes in the English Pre
 ### [Project 3 – Car Sales Dashboard: Analyzing Profit & Performance](./project-3-car-sales-dashboard)  
 **Tools Used:** Microsoft Excel (Pivot Tables, Charts, Formulas, Custom Visuals)  
 
-Built a comprehensive dashboard in Excel to analyze dealership car sales data. Explored performance trends across models, regions, and time using pivot tables, custom charts, and a quadrant-based scatter plot. Delivered strategic insights into profitability, volume efficiency, and seasonal demand — all with no code tools.
+Built a comprehensive dashboard in Excel to analyze dealership car sales data. Explored performance trends across models, regions, and time using pivot tables, custom charts, and a quadrant-based scatter plot. Delivered strategic insights into profitability, volume efficiency, and seasonal demand.
 
 ---
+
+### Project 4 – Improving the ATP Tour: A Sports Analytics Report
+[Project 4 – Car Sales Dashboard: Analyzing Profit & Performance](./Improving_the_ATP_Tour_Sports_Analytics_Project)  
+
+**Tools Used:** Python (Jupyter Notebook), pandas, matplotlib, seaborn
+
+Analyzed ATP Tour match data to uncover surface-specific performance trends, peak player ages, and upset probabilities. Built visualizations and predictive models to guide training investments and strategic decisions — including a case study on Spanish player development. Delivered recommendations through a concise report and storytelling-focused dashboard.
+
 
 
 *More projects coming soon!*
