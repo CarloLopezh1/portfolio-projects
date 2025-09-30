@@ -42,6 +42,24 @@ If FIFA ratings — though fictional — can serve as a reliable proxy for real-
 - [`Fifa_Project_Rcodes.Rmd`](Fifa_Project_Rcodes.Rmd): Full Project R code
 ---
 
+### Example Visuals
+
+#### ![Feature Importance & Predicted vs Actual](./images/data-visuals.png)  
+**Top Features + Model Calibration Visualization**  
+The left chart shows the most influential FIFA-based features in predicting home wins using permutation importance. The right plot compares predicted probabilities to actual outcomes for calibration insight.
+
+---
+
+#### ![Model Coefficients & Confusion Matrix](./images/model-1.png)  
+**Model 1 Regression Output & Confusion Matrix**  
+This panel summarizes logistic regression coefficients, their significance, and key model performance metrics such as accuracy, sensitivity, and specificity.
+
+---
+
+#### ![Model Comparison Table](./images/model-comparison.png)  
+**Comparing Logistic Models: Accuracy & Diagnostic Metrics**  
+Evaluates two logistic models side by side across multiple performance metrics. Model 1 shows higher overall accuracy and better precision, making it the preferred option.
+
 ## Data Sources
 
 1. **[FIFA 20 Complete Player Dataset](https://www.kaggle.com/datasets/stefanoleone992/fifa-20-complete-player-dataset)**  
