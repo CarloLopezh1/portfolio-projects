@@ -60,39 +60,7 @@ Role-based breakdowns show how different features influenced win prediction for 
 
 ---
 
-### Files
-
-- `report.pdf`: Full project report (EDA, clustering, modeling, insights)
-- `notebook.Rmd`: Main RMarkdown analysis notebook
-- `images/`: Visual assets for README and presentations
-
----
-
-
----
-
-### SHAP Summary – Bowler Impact
-Explained the most important features in the XGBoost model for predicting match outcomes.
-
-![SHAP Summary](./images/shap-summary-bowlers.png)
-
----
-
-### Cluster Performance – Batters
-Analyzed win rates and average runs per cluster to assess batting impact.
-
-![Batter Impact](./images/batter-cluster-impact.png)
-
----
-
-### Strategic Summary
-Key recommendations for team composition and recruitment based on role impact.
-
-![Insights Summary](./images/key-insights-summary.png)
-
----
-
-## 📁 Files Included
+## Files Included
 
 - `T20 Cricket Report.pdf`: Final report with visuals and strategic takeaways
 
