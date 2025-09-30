@@ -39,9 +39,7 @@ This project explores match-level ATP Tour data to uncover surface-specific perf
 
 ## Files
 
-- `report.pdf`: Full strategic report (includes visuals + recommendations)
-- `images/`: Visuals used in report and notebook
-- [`Improving ATP Tour`](Improving_the_ATP_Tour_(Sports_Analytics_Project).pdf): Full Project PDF File download
+- [`Improving ATP Tour`](Improving_the_ATP_Tour_Sports_Analytics_Project.pdf): Full Project PDF File download
 
 ---
 
