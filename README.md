@@ -1,4 +1,4 @@
-PSSSST... read me first! 
+(PSSSST... read me first!)
 # Carlo Lopez Hernandez – Data Analytics Portfolio
 
 Hello and welcome to my project portfolio!
