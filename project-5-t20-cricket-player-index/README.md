@@ -62,8 +62,7 @@ Role-based breakdowns show how different features influenced win prediction for 
 
 ## Files Included
 
-- `T20 Cricket Report.pdf`: Final report with visuals and strategic takeaways
-- [`Improving ATP Tour`](Improving_the_ATP_Tour_Sports_Analytics_Project.pdf): Full Project PDF File download
+- [`T20 Cricket Report`](T20_Cricket_Report.pdf): Full Project PDF File download
 
 ---
 
