@@ -45,14 +45,14 @@ Built a comprehensive dashboard in Excel to analyze dealership car sales data. E
 
 ### [Project 4 – Improving the ATP Tour: A Sports Analytics Report](./project-4-atp-tour-tennis-analysis)  
 
-**Tools Used:** Python (Jupyter Notebook), pandas, matplotlib, seaborn
+**Tools Used:** Python (Jupyter Notebook), pandas, matplotlib, seaborn)
 
 Analyzed ATP Tour match data to uncover surface-specific performance trends, peak player ages, and upset probabilities. Built visualizations and predictive models to guide training investments and strategic decisions — including a case study on Spanish player development. Delivered recommendations through a concise report and storytelling-focused dashboard.
 
 ---
 
 ### [Project 5 – T20 Cricket Player Index: Modeling Player Impact](./project-5-t20-cricket-player-index)  
-**Tools Used:** Python (Jupyter Notebook), pandas, scikit-learn, XGBoost, SHAP  
+**Tools Used:** Python (Jupyter Notebook), pandas, scikit-learn, XGBoost, SHAP)
 
 Created a performance profiling system for T20 cricket players using clustering and predictive modeling. Built role-specific pipelines for batters, bowlers, and wicketkeepers, and used XGBoost with SHAP to measure impact on match outcomes. Delivered interpretable visuals to support team strategy, recruitment, and lineup optimization.
 
