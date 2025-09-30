@@ -49,7 +49,7 @@ Analyzed ATP Tour match data to uncover surface-specific performance trends, pea
 
 ---
 
-### [Project 5 – T20 Cricket Player Index: Modeling Player Impact](./project-5-t20-cricket-index)  
+### [Project 5 – T20 Cricket Player Index: Modeling Player Impact](./project-5-t20-cricket-player-index)  
 **Tools Used:** Python (Jupyter Notebook), pandas, scikit-learn, XGBoost, SHAP  
 
 Created a performance profiling system for T20 cricket players using clustering and predictive modeling. Built role-specific pipelines for batters, bowlers, and wicketkeepers, and used XGBoost with SHAP to measure impact on match outcomes. Delivered interpretable visuals to support team strategy, recruitment, and lineup optimization.
