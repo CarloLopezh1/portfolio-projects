@@ -41,8 +41,7 @@ Built a comprehensive dashboard in Excel to analyze dealership car sales data. E
 
 ---
 
-### Project 4 – Improving the ATP Tour: A Sports Analytics Report
-[Project 4 – Car Sales Dashboard: Analyzing Profit & Performance](./Improving_the_ATP_Tour_Sports_Analytics_Project)  
+### [Project 4 – Improving the ATP Tour: A Sports Analytics Report](./Improving_the_ATP_Tour_Sports_Analytics_Project)  
 
 **Tools Used:** Python (Jupyter Notebook), pandas, matplotlib, seaborn
 
